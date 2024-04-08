@@ -1,13 +1,10 @@
 import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:lottie/lottie.dart';
-import 'package:vpn_basic_project/apis/apis.dart';
 import 'package:vpn_basic_project/controllers/location_controller.dart';
+import 'package:vpn_basic_project/widgets/vpn_card.dart';
 
 import '../main.dart';
 
@@ -36,23 +33,31 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        appBar: AppBar(
-          title: Text('DASH'),
-        ),
-        body: _contrller.isLoading.value
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('DASH'),
+      ),
+      body: Obx(
+        () => _contrller.isLoading.value
             ? loadingWidget()
             : _contrller.vpnlist.isEmpty
-                ? noVPNsFound()
+                ? loadingWidget()
                 : vpnData(),
       ),
     );
   }
 
   vpnData() => ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: _contrller.vpnlist.length,
-        itemBuilder: (ctx, i) => Text(_contrller.vpnlist[i].hostmame),
+        padding: EdgeInsets.only(
+            top: mq.height * .015,
+            bottom: mq.height * .1,
+            left: mq.width * .04,
+            right: mq.width * .04),
+        itemBuilder: (ctx, i) => VpnCard(
+          vpn: _contrller.vpnlist[i],
+        ),
       );
 
   loadingWidget() => SizedBox(
@@ -66,18 +71,19 @@ class _LocationScreenState extends State<LocationScreen> {
               width: mq.width * .7,
             ),
             Text(
-              "Loading VPNs...",
+              "Fetching Servers",
               style: TextStyle(fontSize: 18, color: Colors.black54),
             )
           ],
         ),
       );
 
-  noVPNsFound() {
-    Center(
-        child: Text(
-      "No VPNs Found",
-      style: TextStyle(fontSize: 18, color: Colors.black54),
-    ));
+  Widget noVPNsFound() {
+    return Center(
+      child: Text(
+        "No VPNs Found",
+        style: TextStyle(fontSize: 18, color: Colors.black54),
+      ),
+    );
   }
 }

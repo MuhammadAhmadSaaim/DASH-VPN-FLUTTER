@@ -28,6 +28,7 @@ class APIs{
       developer.log('\nGetVPNSServerE: $e');
     }
 
+    vpnList.shuffle();
     return vpnList;
   }
 }
