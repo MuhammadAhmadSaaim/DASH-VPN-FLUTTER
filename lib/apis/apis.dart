@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:csv/csv.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:http/http.dart';
 import 'dart:developer' as developer;
 
 import 'package:vpn_basic_project/models/vpn.dart';
 
 import '../helpers/pref.dart';
+import '../models/ip_details.dart';
 
 class APIs{
   static Future<List<Vpn>> getVPNServers () async{
@@ -37,5 +38,17 @@ class APIs{
         Pref.vpnList = vpnList;
       }
     return vpnList;
+  }
+
+  static Future<void> getIPDetails ({required Rx<IPDetails> ipData}) async{
+
+    try {
+      final res = await get(Uri.parse('http://ip-api.com/json'));
+      final data = jsonDecode(res.body);
+
+      ipData.value = IPDetails.fromJson(data);
+    } catch (e) {
+      developer.log('\nGet IPDetails: $e');
+    }
   }
 }

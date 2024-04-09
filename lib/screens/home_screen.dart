@@ -18,33 +18,29 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     ///Add listener to update vpn state
     VpnEngine.vpnStageSnapshot().listen((event) {
       _controller.vpnState.value = event;
     });
 
-
     return Scaffold(
       appBar: AppBar(
         title: Text('DASH'),
-        leading: Icon(
-          CupertinoIcons.home,
-        ),
+        leading: IconButton(
+            onPressed: () => Get.to(() => NetworkScreen()),
+            icon: Icon(
+              CupertinoIcons.info,
+              size: 28,
+            )),
         actions: [
           IconButton(
               onPressed: () {
-                Get.changeThemeMode(Get.isDarkMode? ThemeMode.light: ThemeMode.dark);
-                Pref.isDarkMode=!Pref.isDarkMode;
+                Get.changeThemeMode(
+                    Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+                Pref.isDarkMode = !Pref.isDarkMode;
               },
               icon: Icon(
                 Icons.brightness_medium_rounded,
-                size: 28,
-              )),
-          IconButton(
-              onPressed: () => Get.to(()=> NetworkScreen()) ,
-              icon: Icon(
-                CupertinoIcons.info,
                 size: 28,
               )),
         ],
@@ -53,7 +49,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         Obx(() => vpnButton(context)),
         Obx(
-          ()=> Row(
+          () => Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               HomeCard(
@@ -68,7 +64,11 @@ class HomeScreen extends StatelessWidget {
                             size: 30,
                           )
                         : null,
-                    backgroundImage: _controller.selectedVpn.value.CountryLong.isEmpty ? null :AssetImage('assets/flags/${_controller.selectedVpn.value.CountryShort.toLowerCase()}.png'),
+                    backgroundImage: _controller
+                            .selectedVpn.value.CountryLong.isEmpty
+                        ? null
+                        : AssetImage(
+                            'assets/flags/${_controller.selectedVpn.value.CountryShort.toLowerCase()}.png'),
                     radius: 30,
                     backgroundColor: Colors.greenAccent,
                   )),
@@ -146,7 +146,8 @@ class HomeScreen extends StatelessWidget {
                     width: mq.height * .14,
                     height: mq.height * .14,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).connectButton, shape: BoxShape.circle),
+                        color: Theme.of(context).connectButton,
+                        shape: BoxShape.circle),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,7 +177,8 @@ class HomeScreen extends StatelessWidget {
                 top: mq.height * .015, bottom: mq.height * 0.02),
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
             decoration: BoxDecoration(
-                color: Theme.of(context).connectButton, borderRadius: BorderRadius.circular(15)),
+                color: Theme.of(context).connectButton,
+                borderRadius: BorderRadius.circular(15)),
             child: Text(
               _controller.vpnState.value == VpnEngine.vpnDisconnected
                   ? "Not Connected"
@@ -187,7 +189,9 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          Obx(() => CountDownTimer(startTimer: _controller.vpnState.value==VpnEngine.vpnConnected)),
+          Obx(() => CountDownTimer(
+              startTimer:
+                  _controller.vpnState.value == VpnEngine.vpnConnected)),
         ],
       );
 
@@ -198,12 +202,12 @@ class HomeScreen extends StatelessWidget {
             onTap: () => Get.to(() => LocationScreen()),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: mq.width * .04),
-                color: Theme.of(context).bottomNav,
+              color: Theme.of(context).bottomNav,
               height: 60,
               child: Row(
                 children: [
                   Icon(
-                    CupertinoIcons.globe,
+                    CupertinoIcons.location_solid,
                     size: 28,
                     color: Colors.white,
                   ),
@@ -220,9 +224,9 @@ class HomeScreen extends StatelessWidget {
                   Spacer(),
                   CircleAvatar(
                     child: Icon(
-                      Icons.keyboard_arrow_right_rounded,
+                      CupertinoIcons.arrow_right,
                       size: 26,
-                      color: Colors.black54,
+                      color: Colors.black,
                     ),
                     backgroundColor: Colors.white,
                   )
