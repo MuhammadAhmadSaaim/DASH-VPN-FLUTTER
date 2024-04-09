@@ -17,7 +17,7 @@ class HomeCard extends StatelessWidget {
         children: [
             icon,SizedBox(height: 6,),Text(title,style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
           SizedBox(height: 6,),
-          Text(subtitle ,style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54),),
+          Text(subtitle ,style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Theme.of(context).lightText),),
         ],
       ),
     );

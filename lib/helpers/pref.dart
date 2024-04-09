@@ -11,6 +11,10 @@ class Pref {
     _box = await Hive.openBox('data');
   }
 
+  static bool get isDarkMode => _box.get('isDarkMode')??false;
+  static set isDarkMode(bool v) => _box.put('isDarkMode', v);
+  
+  
   static Vpn get vpn => Vpn.fromJson(jsonDecode(_box.get('vpn') ?? '{}'));
 
   static set vpn(Vpn v) => _box.put('vpn', jsonEncode(v));

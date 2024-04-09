@@ -5,6 +5,7 @@ import 'package:vpn_basic_project/screens/location_screen.dart';
 import 'package:vpn_basic_project/widgets/count_down_timer.dart';
 import 'package:vpn_basic_project/widgets/home_card.dart';
 import '../controllers/home_controller.dart';
+import '../helpers/pref.dart';
 import '../main.dart';
 import '../models/vpn_status.dart';
 import '../services/vpn_engine.dart';
@@ -31,7 +32,10 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.changeThemeMode(Get.isDarkMode? ThemeMode.light: ThemeMode.dark);
+                Pref.isDarkMode=!Pref.isDarkMode;
+              },
               icon: Icon(
                 Icons.brightness_medium_rounded,
                 size: 28,
@@ -44,7 +48,7 @@ class HomeScreen extends StatelessWidget {
               )),
         ],
       ),
-      bottomNavigationBar: changeLocation(),
+      bottomNavigationBar: changeLocation(context),
       body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         Obx(() => vpnButton()),
         Obx(
@@ -78,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       size: 30,
                     ),
                     radius: 30,
-                    backgroundColor: Colors.lightBlueAccent,
+                    backgroundColor: Colors.indigo,
                   )),
             ],
           ),
@@ -98,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                       size: 30,
                     ),
                     radius: 30,
-                    backgroundColor: Colors.tealAccent,
+                    backgroundColor: Colors.teal,
                   )),
               HomeCard(
                   title: "${snapshot.data?.byteOut ?? "0 Kbps"}",
@@ -186,14 +190,14 @@ class HomeScreen extends StatelessWidget {
         ],
       );
 
-  Widget changeLocation() => SafeArea(
+  Widget changeLocation(BuildContext context) => SafeArea(
         child: Semantics(
           button: true,
           child: InkWell(
             onTap: () => Get.to(() => LocationScreen()),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: mq.width * .04),
-              color: Colors.black87,
+                color: Theme.of(context).bottomNav,
               height: 60,
               child: Row(
                 children: [
