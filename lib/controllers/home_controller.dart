@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:vpn_basic_project/helpers/pref.dart';
 
 import '../models/vpn.dart';
 import '../models/vpn_config.dart';
 import '../services/vpn_engine.dart';
 
 class HomeController extends GetxController{
-  final Rx<Vpn>selectedVpn = Vpn.fromJson({}).obs;
+  final Rx<Vpn>selectedVpn = Pref.vpn.obs;
 
   final vpnState = VpnEngine.vpnDisconnected.obs;
 

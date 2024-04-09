@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 
 import '../apis/apis.dart';
+import '../helpers/pref.dart';
 import '../models/vpn.dart';
 
 class LocationController extends GetxController{
-  List<Vpn> vpnlist=[];
+  List<Vpn> vpnlist= Pref.vpnList;
   final RxBool isLoading = false.obs;
 
   Future<void> getVpnData() async{

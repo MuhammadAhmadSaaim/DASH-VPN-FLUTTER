@@ -14,7 +14,7 @@ class LocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _contrller.getVpnData();
+    if(_contrller.vpnlist.isEmpty) _contrller.getVpnData();
 
     return Scaffold(
       appBar: AppBar(

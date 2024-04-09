@@ -6,6 +6,8 @@ import 'dart:developer' as developer;
 
 import 'package:vpn_basic_project/models/vpn.dart';
 
+import '../helpers/pref.dart';
+
 class APIs{
   static Future<List<Vpn>> getVPNServers () async{
     final List<Vpn> vpnList=[];
@@ -29,6 +31,11 @@ class APIs{
     }
 
     vpnList.shuffle();
+
+    if(vpnList.isNotEmpty)
+      {
+        Pref.vpnList = vpnList;
+      }
     return vpnList;
   }
 }
