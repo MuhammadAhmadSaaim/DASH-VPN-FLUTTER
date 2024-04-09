@@ -29,7 +29,7 @@ class APIs{
           vpnList.add(Vpn.fromJson((tempJson)));
       }
     } catch (e) {
-      MyDialogs.error(msg: "Failed to fetch VPN Servers");
+      MyDialogs.error(msg: "Network Error: Failed to fetch VPN Servers");
       developer.log('\nGetVPNSServerE: $e');
     }
 
@@ -50,7 +50,7 @@ class APIs{
 
       ipData.value = IPDetails.fromJson(data);
     } catch (e) {
-      MyDialogs.error(msg: "Failed to fetch Ip-Details");
+      MyDialogs.error(msg: "Network Error: Failed to fetch IP-Details");
       developer.log('\nGet IPDetails: $e');
     }
   }
