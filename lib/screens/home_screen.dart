@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vpn_basic_project/screens/location_screen.dart';
+import 'package:vpn_basic_project/screens/network_screen.dart';
 import 'package:vpn_basic_project/widgets/count_down_timer.dart';
 import 'package:vpn_basic_project/widgets/home_card.dart';
 import '../controllers/home_controller.dart';
@@ -41,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                 size: 28,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () => Get.to(()=> NetworkScreen()) ,
               icon: Icon(
                 CupertinoIcons.info,
                 size: 28,
