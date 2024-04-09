@@ -46,4 +46,5 @@ class MyApp extends StatelessWidget {
 extension AppTheme on ThemeData{
   Color get lightText => Pref.isDarkMode? Colors.white: Colors.black54;
   Color get bottomNav => Pref.isDarkMode? Colors.white12: Colors.black87;
+  Color get connectButton => Pref.isDarkMode? Colors.white12: Colors.black54;
 }

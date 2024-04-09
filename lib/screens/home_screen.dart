@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: changeLocation(context),
       body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        Obx(() => vpnButton()),
+        Obx(() => vpnButton(context)),
         Obx(
           ()=> Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                   title: _controller.selectedVpn.value.CountryLong.isEmpty
                       ? 'Country'
                       : _controller.selectedVpn.value.CountryLong,
-                  subtitle: "Free",
+                  subtitle: "Server",
                   icon: CircleAvatar(
                     child: _controller.selectedVpn.value.CountryLong.isEmpty
                         ? Icon(
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                   title: _controller.selectedVpn.value.CountryLong.isEmpty
                       ? '100 ms'
                       : _controller.selectedVpn.value.Ping + " ms",
-                  subtitle: "PING",
+                  subtitle: "Ping",
                   icon: CircleAvatar(
                     child: Icon(
                       Icons.equalizer_rounded,
@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget vpnButton() => Column(
+  Widget vpnButton(BuildContext context) => Column(
         children: [
           Semantics(
             button: true,
@@ -134,7 +134,7 @@ class HomeScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all((5)),
                 decoration: BoxDecoration(
-                    color: Colors.black54.withOpacity(.1),
+                    color: Theme.of(context).connectButton.withOpacity(.1),
                     shape: BoxShape.circle),
                 child: Container(
                   padding: EdgeInsets.all((5)),
@@ -145,7 +145,7 @@ class HomeScreen extends StatelessWidget {
                     width: mq.height * .14,
                     height: mq.height * .14,
                     decoration: BoxDecoration(
-                        color: Colors.black54, shape: BoxShape.circle),
+                        color: Theme.of(context).connectButton, shape: BoxShape.circle),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -175,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                 top: mq.height * .015, bottom: mq.height * 0.02),
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
             decoration: BoxDecoration(
-                color: Colors.black54, borderRadius: BorderRadius.circular(15)),
+                color: Theme.of(context).connectButton, borderRadius: BorderRadius.circular(15)),
             child: Text(
               _controller.vpnState.value == VpnEngine.vpnDisconnected
                   ? "Not Connected"

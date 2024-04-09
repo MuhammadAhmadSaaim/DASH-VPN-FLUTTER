@@ -29,9 +29,9 @@ class LocationScreen extends StatelessWidget {
       ),
       body: Obx(
         () => _contrller.isLoading.value
-            ? loadingWidget()
+            ? loadingWidget(context)
             : _contrller.vpnlist.isEmpty
-                ? noVPNsFound()
+                ? noVPNsFound(context)
                 : vpnData(),
       ),
     );
@@ -50,7 +50,7 @@ class LocationScreen extends StatelessWidget {
         ),
       );
 
-  loadingWidget() => SizedBox(
+  loadingWidget(BuildContext context) => SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Column(
@@ -62,17 +62,17 @@ class LocationScreen extends StatelessWidget {
             ),
             Text(
               "Fetching Servers",
-              style: TextStyle(fontSize: 18, color: Colors.black54),
+              style: TextStyle(fontSize: 18, color: Theme.of(context).lightText),
             )
           ],
         ),
       );
 
-  Widget noVPNsFound() {
+  Widget noVPNsFound(BuildContext context) {
     return Center(
       child: Text(
         "No VPNs Found",
-        style: TextStyle(fontSize: 18, color: Colors.black54),
+        style: TextStyle(fontSize: 18, color: Theme.of(context).lightText),
       ),
     );
   }
