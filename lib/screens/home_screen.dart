@@ -182,7 +182,7 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          Obx(() => CountDownTimer(startTimer: _controller.startTimer.value)),
+          Obx(() => CountDownTimer(startTimer: _controller.vpnState.value==VpnEngine.vpnConnected)),
         ],
       );
 

@@ -19,19 +19,19 @@ class VpnCard extends StatelessWidget {
     final controller = Get.find<HomeController>();
     return Card(
       elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: mq.height*.012),
+      margin: EdgeInsets.symmetric(vertical: mq.height * .012),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       child: InkWell(
-        onTap: (){
-          controller.selectedVpn.value=vpn;
+        onTap: () {
+          controller.selectedVpn.value = vpn;
           Get.back();
-          if(controller.vpnState==VpnEngine.vpnDisconnected){
+          if (controller.vpnState == VpnEngine.vpnConnected) {
             VpnEngine.stopVpn();
-            controller.connectToVpn();
-          }
-          else{
+            Future.delayed(
+                Duration(seconds: 2), () => controller.connectToVpn());
+          } else {
             controller.connectToVpn();
           }
         },
@@ -45,11 +45,15 @@ class VpnCard extends StatelessWidget {
               border: Border.all(color: Colors.black12),
               borderRadius: BorderRadius.circular(5),
             ),
-            child: ClipRRect( // Wrap ClipRect with ClipRRect
-              borderRadius: BorderRadius.circular(5), // Specify the border radius
+            child: ClipRRect(
+              // Wrap ClipRect with ClipRRect
+              borderRadius: BorderRadius.circular(5),
+              // Specify the border radius
               child: Image.asset(
                 'assets/flags/${vpn.CountryShort.toLowerCase()}.png',
-                height: 40, fit: BoxFit.cover,
+                height: 40,
+                width: mq.width *.15,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -64,7 +68,7 @@ class VpnCard extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                formatBytes(vpn.Speed,2),
+                formatBytes(vpn.Speed, 2),
                 style: TextStyle(fontSize: 13),
               ),
             ],
@@ -89,10 +93,11 @@ class VpnCard extends StatelessWidget {
       ),
     );
   }
-  String formatBytes(int bytes, int decimals){
-    if(bytes<=0)return "0 B";
-    const suffixes = ['Bps', 'Kbps','Mbps', 'Gbps', 'Tbps'];
-    var i = (log(bytes)/log(1024)).floor();
-    return '${(bytes/pow(1024,i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+
+  String formatBytes(int bytes, int decimals) {
+    if (bytes <= 0) return "0 B";
+    const suffixes = ['Bps', 'Kbps', 'Mbps', 'Gbps', 'Tbps'];
+    var i = (log(bytes) / log(1024)).floor();
+    return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
   }
 }

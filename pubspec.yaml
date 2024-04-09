@@ -17,6 +17,8 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   http: ^1.2.1
   lottie: ^3.1.0
 

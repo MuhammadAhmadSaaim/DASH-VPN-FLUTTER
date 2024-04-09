@@ -20,11 +20,18 @@ class LocationScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('DASH'),
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 10, right: 10),
+        child: FloatingActionButton(
+          onPressed: ()=>_contrller.getVpnData(),
+          child: Icon(CupertinoIcons.refresh),
+        ),
+      ),
       body: Obx(
         () => _contrller.isLoading.value
             ? loadingWidget()
             : _contrller.vpnlist.isEmpty
-                ? loadingWidget()
+                ? noVPNsFound()
                 : vpnData(),
       ),
     );
