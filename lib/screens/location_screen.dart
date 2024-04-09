@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,31 +7,15 @@ import 'package:vpn_basic_project/widgets/vpn_card.dart';
 
 import '../main.dart';
 
-class LocationScreen extends StatefulWidget {
-  const LocationScreen({super.key});
+class LocationScreen extends StatelessWidget {
+  LocationScreen({super.key});
 
-  @override
-  State<LocationScreen> createState() => _LocationScreenState();
-}
-
-class _LocationScreenState extends State<LocationScreen> {
   final _contrller = LocationController();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _contrller.getVpnData();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _contrller.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    _contrller.getVpnData();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('DASH'),
