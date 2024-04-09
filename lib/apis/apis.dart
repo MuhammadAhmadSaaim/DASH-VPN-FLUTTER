@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:csv/csv.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:http/http.dart';
+import 'package:vpn_basic_project/helpers/my_dialogs.dart';
 import 'dart:developer' as developer;
 
 import 'package:vpn_basic_project/models/vpn.dart';
@@ -28,6 +29,7 @@ class APIs{
           vpnList.add(Vpn.fromJson((tempJson)));
       }
     } catch (e) {
+      MyDialogs.error(msg: "Failed to fetch VPN Servers");
       developer.log('\nGetVPNSServerE: $e');
     }
 
@@ -48,6 +50,7 @@ class APIs{
 
       ipData.value = IPDetails.fromJson(data);
     } catch (e) {
+      MyDialogs.error(msg: "Failed to fetch Ip-Details");
       developer.log('\nGet IPDetails: $e');
     }
   }

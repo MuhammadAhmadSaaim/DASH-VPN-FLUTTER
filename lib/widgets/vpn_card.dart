@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:vpn_basic_project/controllers/home_controller.dart';
 import 'package:vpn_basic_project/services/vpn_engine.dart';
 
+import '../helpers/my_dialogs.dart';
 import '../helpers/pref.dart';
 import '../main.dart';
 import '../models/vpn.dart';
